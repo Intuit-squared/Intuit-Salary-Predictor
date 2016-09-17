@@ -1,0 +1,26 @@
+package com.mygdx.main.page_stuff;
+
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.main.graphics.Textures;
+
+public class Page {
+
+	String question;
+	Sprite background;
+	List<Button> buttons = new ArrayList<Button>()
+	
+	public Page(String question) {
+		this.question = question;
+		background = new Sprite(Textures.BACKGROUND);
+	}
+	
+	public void update() {
+		
+	}
+	
+	public void draw(SpriteBatch sb) {
+		background.draw(sb);
+		
+	}
+}

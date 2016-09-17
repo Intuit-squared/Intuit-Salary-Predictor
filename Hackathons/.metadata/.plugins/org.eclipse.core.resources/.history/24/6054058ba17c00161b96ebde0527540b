@@ -1,0 +1,9 @@
+package com.mygdx.main.page_stuff;
+
+public class Page {
+
+	public Page() {
+		
+	}
+	
+}

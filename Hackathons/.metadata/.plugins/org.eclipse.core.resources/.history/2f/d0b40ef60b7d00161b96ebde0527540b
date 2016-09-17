@@ -1,0 +1,12 @@
+package com.mygdx.main.page_stuff;
+
+public class ButtonManager {
+
+	List<Button> buttons = new ArrayList<Button>();
+	
+	public ButtonManager() {
+		
+	}
+	
+	
+}

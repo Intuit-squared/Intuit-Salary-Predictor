@@ -1,0 +1,24 @@
+package com.mygdx.main.page_stuff;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+public class ButtonManager {
+
+	public static List<Button> buttons = new ArrayList<Button>();
+	
+	public ButtonManager() {
+		
+	}
+	
+	public void update() {
+		
+	}
+	
+	public void draw(SpriteBatch sb) {
+		
+		
+	}
+}

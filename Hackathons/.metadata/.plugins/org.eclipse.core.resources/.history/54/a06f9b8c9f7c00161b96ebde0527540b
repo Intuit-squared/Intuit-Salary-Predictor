@@ -1,0 +1,25 @@
+public class PageManager() {
+
+	public static List<Page> pages = new ArrayList<>();
+	public static currentPage;
+
+	public PageManager() {
+		
+		
+		
+	}
+	
+	public void update() {
+		
+		
+		
+	}
+	
+	
+	public void draw(SpriteBatcb sb) {
+		
+		
+		
+	}
+
+}

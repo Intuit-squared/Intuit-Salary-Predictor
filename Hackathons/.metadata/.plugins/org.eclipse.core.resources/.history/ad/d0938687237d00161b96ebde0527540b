@@ -1,0 +1,161 @@
+package com.mygdx.main.page_stuff;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+public class PageManager {
+	
+	public static List<Page> pages = new ArrayList<Page>();
+	public static Page topPage, endPage;
+	public static Page currentPage;
+	public static int currentIndex;
+	public static boolean end = false;
+	public static List<String> inputs = new ArrayList<String>();
+	
+	public PageManager() {
+		populatePages();
+		setPage(0);
+	}
+	
+	private void populatePages() {
+		List<String> answers = new ArrayList<String>();
+		topPage = new Page("",  answers);
+		topPage.top = true;
+		
+		answers = new ArrayList<String>();
+		endPage = new Page("",  answers);
+		endPage.end = true;
+		
+		answers = new ArrayList<String>();
+		answers.add("Male");
+		answers.add("Female");
+		Page p = new Page("What is your sex?", answers);
+		pages.add(p);
+		
+		answers = new ArrayList<String>();
+		answers.add("White");
+		answers.add("Black");
+		answers.add("Asian");
+		answers.add("Hispanic");
+		p = new Page("What is your race?", answers);
+		pages.add(p);		
+
+		answers = new ArrayList<String>();
+		answers.add("Management: science, & arts");
+		answers.add("Management: business & finance");
+		answers.add("Management occupations");
+		answers.add("Chief executives, managers");
+		answers.add("Other Managers");
+		answers.add("Others (To Next Page)");
+		p = new Page("Future occupation?", answers);
+		pages.add(p);
+
+		answers = new ArrayList<String>();
+		answers.add("Business and finance ops");
+		answers.add("Business op specialists");
+		answers.add("Financial specialists");
+		answers.add("Professional related occupations");
+		answers.add("Computer and math");
+		answers.add("Computer analysts, programmers");
+		answers.add("Others (To Next Page)");
+		p = new Page("Future occupation?", answers);
+		pages.add(p);
+		
+		answers = new ArrayList<String>();
+		answers.add("Math, statisticians, research");
+		answers.add("Architecture and engineering");
+		answers.add("Non-naval architects");
+		answers.add("Engineers");
+		answers.add("Drafters, surveyors, or technicians");
+		answers.add("Life, physical, social science");
+		answers.add("Others (To Next Page)");
+		p = new Page("Future occupation?", answers);
+		pages.add(p);
+
+		answers = new ArrayList<String>();
+		answers.add("Other scientists");
+		answers.add("Science technicians");
+		answers.add("Community and sociel services");
+		answers.add("Legal occupations");
+		answers.add("Lawyers, judges, & magistrates");
+		answers.add("Paralegals");
+		answers.add("Others (To Next Page)");
+		p = new Page("Future occupation?", answers);
+		pages.add(p);
+
+		answers = new ArrayList<String>();
+		answers.add("Library occupation");
+		answers.add("Postsecondary teachers");
+		answers.add("Other teachers");
+		answers.add("Archivists, curators");
+		answers.add("arts, design, entertaiment");
+		answers.add("Others (To Next Page)");
+		p = new Page("Future occupation?", answers);
+		pages.add(p);
+
+		answers = new ArrayList<String>();
+		answers.add("Healthcare practitioner");
+		answers.add("Doctor");
+		answers.add("Nurse");
+		answers.add("Other Health");
+		answers.add("Service occupations");
+		answers.add("Healthcare support");
+		answers.add("Others (To Next Page)");
+		p = new Page("Future occupation?", answers);
+		pages.add(p);
+
+		answers = new ArrayList<String>();
+		answers.add("Protective services");
+		answers.add("Food preparation");
+		answers.add("Food supervising");
+		answers.add("Engineers");
+		answers.add("Science");
+		answers.add("Law");
+		answers.add("Others (To Next Page)");
+		p = new Page("Future occupation?", answers);
+		pages.add(p);
+
+	}
+	
+	public static void setPage(int i) {
+		currentIndex = i;
+		if (currentIndex >= pages.size()) {
+			end = true;
+			FileHandle file = Gdx.files.local("inputs/inputs.txt");
+			String text = "";
+			for (String input: inputs) {
+				text += input + "\n";
+			}
+			file.writeString(text, false);				
+		} else {			
+			currentPage = pages.get(currentIndex);
+			currentPage.populateButtons();
+		}
+	}
+	
+	public static void nextPage() {
+		setPage(currentIndex + 1);
+	}
+	
+	public void update() {
+		if (end) {
+			endPage.update();
+		} else {			
+			topPage.update();
+			currentPage.update();
+		}
+	}
+	
+	public void draw(SpriteBatch sb) {
+		if (end) {
+			endPage.draw(sb);
+		} else {			
+			currentPage.draw(sb);
+			topPage.draw(sb);
+		}
+	}
+}

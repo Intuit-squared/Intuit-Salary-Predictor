@@ -1,0 +1,58 @@
+package com.mygdx.main.page_stuff;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.main.Main;
+import com.mygdx.main.graphics.Fonts;
+import com.mygdx.main.graphics.Textures;
+
+public class Page {
+
+	String question;
+	List<String> answers;
+	Sprite background;
+	List<Button> buttons = new ArrayList<Button>();
+	
+	BitmapFont font;
+
+	public Page(String question, List<String> answers) {
+		this.question = question;
+		this.answers = answers;
+		background = new Sprite(Textures.BACKGROUND);
+		font = new BitmapFont();
+		populateButtons();
+	}
+
+	private void populateButtons() {
+		for (String answer: answers) {			
+			Button b = new Button(answer, Textures.BUTTON, Main.WIDTH / 2 - Textures.BUTTON.getWidth() / 2,
+					Main.HEIGHT - 240 - ((Textures.BUTTON.getHeight() + 5) * buttons.size()));
+			buttons.add(b);
+		}
+	}
+
+	public void update() {
+		for (Button b : buttons) {
+			b.update();
+			if (b.isAccessed() && !b.isPrevAccessed()) {	
+				System.out.println("RAN");
+				PageManager.nextPage();
+			}
+		}
+	}
+
+	public void draw(SpriteBatch sb) {
+		background.draw(sb);
+		for (Button b : buttons) {
+			b.draw(sb);
+		}
+		
+		Fonts.titleFont.draw(sb, question, 40, 380);
+		String page = (PageManager.currentIndex + 1) + " / " + PageManager.pages.size();
+		Fonts.textFontBlack.draw(sb, page, 180, 30);
+	}
+}

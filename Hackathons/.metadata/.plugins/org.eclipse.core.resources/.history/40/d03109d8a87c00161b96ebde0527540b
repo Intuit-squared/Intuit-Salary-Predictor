@@ -1,0 +1,196 @@
+package com.mygdx.main.page_stuff;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+
+public class Button {
+
+	Sprite up, down;
+
+	private float xOffset = 0;
+	private float x, y;
+	private float mouseX, mouseY;
+	private boolean accessed = false, prevAccessed = false;
+	private boolean mouseDown = false;
+	private boolean draw = true;
+	private boolean hovered = false;
+	private float width, height;
+
+	Rectangle hitbox;
+	private float offset = 0;
+
+	public Button(Texture up, Texture up2, float xOffset, float yOffset, float x, float y) {
+		this.up = new Sprite(up);
+		this.down = new Sprite(up);
+		this.down.setColor(new Color(0.9f, 0.9f, 0.9f, 1));
+		shadow.setColor(0, 0, 0, 0.2f);
+
+		if (up2 != null) {
+			this.up2 = new Sprite(up2);
+			this.down2 = new Sprite(up2);
+			this.down2.setColor(new Color(0.9f, 0.9f, 0.9f, 1));
+		}
+
+		this.x = x;
+		this.y = y;
+
+		this.up.setX(x);
+		this.up.setY(y);
+		this.down.setX(x + 2);
+		this.down.setY(y - 2);
+		shadow.setX(x + 2f);
+		shadow.setY(y - 2f);
+
+		if (up2 != null) {
+			this.up2.setX(x + xOffset);
+			this.up2.setY(y + yOffset);
+			this.down2.setX(x + xOffset + 2);
+			this.down2.setY(y + yOffset - 2);
+		}
+
+		sprite = this.up;
+		if (up2 != null)
+			sprite2 = this.up2;
+
+		width = sprite.getWidth();
+		height = sprite.getHeight();
+
+		hitbox = new Rectangle(x + Game.WIDTH / 2, y + Game.HEIGHT / 2, width, height);
+	}
+	
+	public void setDown(Texture down) {
+		this.down = new Sprite(down);
+		this.down.setX(x);
+		this.down.setY(y);
+	}
+
+	public void hovered(float dt) {
+		if (mouseDown) {
+			accessed(dt);
+		}
+	}
+
+	public void accessed(float dt) {
+		accessed = true;
+	}
+
+	public void update(float dt) {
+		prevAccessed = accessed;
+		if (!mouseDown && !accessed)
+			accessed = false;
+
+		mouseX = Gdx.input.getX();
+		mouseY = Game.HEIGHT - Gdx.input.getY();
+		if (fixed) {
+			mouseX = Gdx.input.getX() + ScreenMode.getScreenX();
+			mouseY = -Gdx.input.getY() + ScreenMode.getScreenY() + Game.HEIGHT;
+		}
+
+		Vector2 mouse = new Vector2(mouseX, mouseY);
+
+		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+			mouseDown = true;
+		} else {
+			mouseDown = false;
+			accessed = false;
+		}
+		if (mouseDown && hitbox.contains(mouse) && !accessed) {			
+			Jukebox.play("click");
+			if (text != null && text.text.equalsIgnoreCase("BUY")) {
+				Jukebox.play("buy");
+			}
+		}
+		if (hitbox.contains(mouse) || accessed) {
+			hovered(dt);
+			hovered = true;
+			sprite = down;
+			if (up2 != null)
+				sprite2 = down2;
+			textXOffset = textXOffsetDown;
+			textYOffset = textYOffsetDown;
+		} else {
+			hovered = false;
+			sprite = up;
+			if (up2 != null)
+				sprite2 = up2;
+			textXOffset = textXOffsetUp;
+			textYOffset = textYOffsetUp;
+		}
+
+	}
+
+	public void draw(SpriteBatch sb) {
+		if (draw) {
+			if (drawShadow) {
+				shadow.draw(sb);
+			}
+			sprite.draw(sb);
+		}
+	}
+
+	public boolean isAccessed() {
+		return accessed;
+	}
+
+	public boolean isPrevAccessed() {
+		return prevAccessed;
+	}
+
+	public void setAccessed(boolean accessed) {
+		this.accessed = accessed;
+	}
+
+	public void setTint(Color c) {
+		up.setColor(c);
+		down.setColor(c);
+	}
+
+	public void setFixed() {
+		fixed = true;
+	}
+
+	public void print() {
+		System.out.println(mouseX + " " + mouseY + "  |  " + hitbox);
+	}
+
+	public float getX() {
+		return x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setDraw(boolean b) {
+		draw = b;
+	}
+
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+	public float getXOffset() {
+		return xOffset;
+	}
+
+	public void setXOffset(float f) {
+		xOffset = f;
+	}
+
+	public void setOffset(float f) {
+		offset = f;
+	}
+
+	public float getOffset() {
+		return offset;
+	}
+
+	public boolean getHovered() {
+		return hovered;
+	}
+}

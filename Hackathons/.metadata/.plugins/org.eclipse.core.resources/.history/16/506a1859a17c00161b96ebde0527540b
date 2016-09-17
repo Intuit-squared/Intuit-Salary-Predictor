@@ -1,0 +1,19 @@
+package com.mygdx.main.page_stuff;
+
+public class PageManager {
+	
+	public static List<Page> pages = new ArrayList<>();
+	public static Page currentPage;
+	
+	public PageManager() {
+		
+		
+	}
+	
+	public void update() {
+		for (Page P: pages) {
+			
+		}
+	}
+	
+}

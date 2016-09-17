@@ -1,0 +1,30 @@
+package com.mygdx.main.graphics;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+
+public class Fonts {
+
+	int viewportHeight;
+	public static BitmapFont titleFont;
+	public static BitmapFont textFont;
+
+	public Fonts() {
+		createFonts();
+	}
+	
+	private void createFonts() {
+		FileHandle fontFile = Gdx.files.internal("data/Roboto-Bold.ttf");
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
+		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		parameter.size = 12;
+		textFont = generator.generateFont(parameter);
+		parameter.size = 24;
+		titleFont = generator.generateFont(parameter);
+		generator.dispose();
+	}
+	
+}

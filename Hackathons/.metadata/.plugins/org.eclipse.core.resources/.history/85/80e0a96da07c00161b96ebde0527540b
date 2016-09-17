@@ -1,0 +1,19 @@
+public class Page() {
+	
+	public String question;
+	
+	public Page(String question) {
+		this.question = question;
+		
+	}
+	
+	public void update() {
+		
+		
+	}
+	
+	public void draw(SpriteBatcb sb) {
+		
+		
+	}
+}

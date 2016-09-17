@@ -1,0 +1,6 @@
+package com.mygdx.main.graphics;
+
+public class Textures()
+{
+	public static void Sprite BACKGROUND=new Sprite(new Texture(Gdx.files.internal("background.png")));
+}

@@ -1,0 +1,15 @@
+public class PageManager() {
+
+	public static List<Page> pages = new ArrayList<>();
+	public static currentPage;
+
+	public PageManager() {
+		
+		
+		
+	}
+	
+	public void setPage(int page) {
+		
+	}
+}

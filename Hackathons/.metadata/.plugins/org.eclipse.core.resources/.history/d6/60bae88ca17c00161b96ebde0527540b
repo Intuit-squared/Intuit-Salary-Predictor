@@ -1,0 +1,19 @@
+package com.mygdx.main.page_stuff;
+
+public class Page {
+
+	String question;
+	
+	public Page(String question) {
+		this.question = question;
+	}
+	
+	public void update() {
+		
+	}
+	
+	public void draw(SpriteBatch sb) {
+		
+		
+	}
+}

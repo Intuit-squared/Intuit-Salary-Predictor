@@ -1,0 +1,22 @@
+package com.mygdx.main.page_stuff;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+public class Page {
+
+	String question;
+	Sprite background;
+	
+	public Page(String question) {
+		this.question = question;
+	}
+	
+	public void update() {
+		
+	}
+	
+	public void draw(SpriteBatch sb) {
+		
+		
+	}
+}

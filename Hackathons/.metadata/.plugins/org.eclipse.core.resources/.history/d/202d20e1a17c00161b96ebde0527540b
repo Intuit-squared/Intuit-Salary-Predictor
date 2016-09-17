@@ -1,0 +1,37 @@
+package com.mygdx.main.page_stuff;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+public class PageManager {
+	
+	public static List<Page> pages = new ArrayList<Page>();
+	public static Page currentPage;
+	
+	public PageManager() {
+		
+		populatePages();
+		currentPage = pages.get(0);
+		
+	}
+	
+	private void populatePages() {
+		Page p = new Page("question 1");
+	}
+	
+	
+	
+	public void update() {
+		for (Page p: pages) {
+			p.update();
+		}
+	}
+	
+	public void draw(SpriteBatch sb) {
+		for (Page p: pages) {
+			p.draw(sb);
+		}
+	}
+}

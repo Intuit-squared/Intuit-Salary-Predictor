@@ -1,0 +1,50 @@
+package com.mygdx.main.page_stuff;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.mygdx.main.Main;
+
+public class ButtonManager {
+
+	public static List<Button> buttons = new ArrayList<Button>();
+	
+	public ButtonManager() {
+		
+	}
+	
+	public void update() {
+		for (Button b: buttons) {
+			b.mouseX = Gdx.input.getX();
+			b.mouseY = Main.HEIGHT - Gdx.input.getY();
+			Vector2 mouse = new Vector2(b.mouseX, b.mouseY);
+			
+			if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+				System.out.println("RAN");
+				b.mouseDown = true;
+			} else {
+				b.mouseDown = false;
+				b.clicked = false;
+			}
+			if (b.hitbox.contains(mouse) || b.accessed) {
+				b.hovered();
+				b.sprite = b.down;
+			} else {
+				b.sprite = b.up;
+			}
+			
+			if (b.clicked()) {
+				PageManager.nextPage();
+			}
+		}
+	}
+	
+	public void draw(SpriteBatch sb) {
+		
+		
+	}
+}

@@ -1,0 +1,45 @@
+package com.mygdx.main.page_stuff;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.main.Main;
+import com.mygdx.main.graphics.Textures;
+
+public class Page {
+
+	String question;
+	Sprite background;
+	List<Button> buttons = new ArrayList<Button>();
+	
+	public Page(String question) {
+		this.question = question;
+		background = new Sprite(Textures.BACKGROUND);
+		
+		populateButtons();
+	}
+	
+	private void populateButtons() {
+		Button b = new Button(Textures.BUTTON, Main.WIDTH / 2 - Textures.BUTTON.getWidth() / 2, Main.HEIGHT - 240 - ((Textures.BUTTON.getHeight() + 5) * buttons.size()));
+		buttons.add(b);
+		Button b = new Button(Textures.BUTTON, Main.WIDTH / 2 - Textures.BUTTON.getWidth() / 2, Main.HEIGHT - 240 - ((Textures.BUTTON.getHeight() + 5) * buttons.size()));
+		buttons.add(b);
+		Button b = new Button(Textures.BUTTON, Main.WIDTH / 2 - Textures.BUTTON.getWidth() / 2, Main.HEIGHT - 240 - ((Textures.BUTTON.getHeight() + 5) * buttons.size()));
+		buttons.add(b);		
+	}
+	
+	public void update() {
+		for (Button b: buttons) {
+			b.update();
+		}
+	}
+	
+	public void draw(SpriteBatch sb) {
+		background.draw(sb);
+		for (Button b: buttons) {
+			b.draw(sb);
+		}
+	}
+}

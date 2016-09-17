@@ -1,0 +1,4 @@
+package com.mygdx.main.graphics;
+
+
+public static void Sprite BACKGROUND = new Sprite(new Texture(Gdx.))

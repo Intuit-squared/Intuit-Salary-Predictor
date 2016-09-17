@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Intuit/core/src/com/mygdx/main/PageManager&apos; to &apos;page&apos;" description="Rename resource &apos;PageManager&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="core/src/com/mygdx/main/PageManager" name="page" stamp="1474093109378" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Intuit/core/src/com/mygdx/main/page&apos; to &apos;page_classes&apos;" description="Rename resource &apos;page&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="core/src/com/mygdx/main/page" name="page_classes" stamp="1474093119686" updateReferences="true"/>
+</session>

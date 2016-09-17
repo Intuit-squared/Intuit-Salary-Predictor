@@ -1,0 +1,25 @@
+public class PageManager()
+{
+
+	public static List<Page> pages = new ArrayList<>();
+
+	public static currentPage;
+
+	public PageManager() {
+		
+		
+		
+	}
+
+	public void update() {
+		for (Page p : pages) {
+			p.update());
+		}
+	}
+
+	public void draw(SpriteBatcb sb) {
+		for (Page p : pages) {
+			p.draw(sb);
+		}
+	}
+}

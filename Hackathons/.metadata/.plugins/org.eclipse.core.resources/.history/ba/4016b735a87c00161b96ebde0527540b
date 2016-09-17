@@ -1,0 +1,10 @@
+package com.mygdx.main.graphics;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+
+public class Textures {
+	
+	public static Texture MENU_BACK = new Texture(Gdx.files.internal(".png"));
+
+}

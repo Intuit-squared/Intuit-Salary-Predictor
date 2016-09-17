@@ -1,0 +1,13 @@
+public class PageManager() {
+
+	public static List<Page> pages = new ArrayList<>();
+	public static currentPage = 0;
+
+	public PageManager() {
+		
+		
+		
+	}
+	
+	
+}

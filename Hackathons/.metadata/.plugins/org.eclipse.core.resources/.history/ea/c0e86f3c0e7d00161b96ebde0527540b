@@ -1,0 +1,61 @@
+package com.mygdx.main.page_stuff;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+public class PageManager {
+	
+	public static List<Page> pages = new ArrayList<Page>();
+	public static Page currentPage;
+	public static int currentIndex;
+	
+	public PageManager() {
+		populatePages();
+		setPage(0);
+	}
+	
+	private void populatePages() {
+		List<String> answers = new ArrayList<String>();
+		answers.add("Science or Engineering");
+		answers.add("Business");
+		answers.add("Education");
+		answers.add("Arts, Humanities, or Other");
+		Page p = new Page("What was your major?", answers);
+		pages.add(p);
+		
+		answers = new ArrayList<String>();
+		answers.add("White");
+		answers.add("Black");
+		answers.add("Asian");
+		answers.add("Hispanic");
+		p = new Page("What is your race?", answers);
+		pages.add(p);
+		
+		answers = new ArrayList<String>();
+		answers.add("Male");
+		answers.add("Female");
+		p = new Page("What is your sex?", answers);
+		pages.add(p);
+	}
+	
+	public void setPage(int i) {
+		currentIndex = i;
+		currentPage = pages.get(currentIndex);
+		currentPage.populateButtons();
+	}
+	
+	public static void nextPage() {
+		currentIndex++;
+		currentPage = pages.get(currentIndex);
+	}
+	
+	public void update() {
+		currentPage.update();
+	}
+	
+	public void draw(SpriteBatch sb) {
+		currentPage.draw(sb);
+	}
+}

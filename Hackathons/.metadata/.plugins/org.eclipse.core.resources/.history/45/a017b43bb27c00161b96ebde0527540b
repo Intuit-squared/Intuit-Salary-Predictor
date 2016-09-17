@@ -1,0 +1,143 @@
+package com.mygdx.main.page_stuff;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.mygdx.main.Main;
+import com.mygdx.main.graphics.Fonts;
+
+public class Button {
+
+	Sprite up, down;
+	Sprite sprite;
+
+	String answer;
+
+	private float x, y;
+	private float mouseX, mouseY;
+	private boolean accessed = false, prevAccessed = false;
+	private boolean clicked = false;
+	private boolean mouseDown = false, prevMouseDown = false;
+	private boolean draw = true;
+	private float width, height;
+
+	Rectangle hitbox;
+	BitmapFont font;
+
+	public Button(String answer, Texture up, float x, float y) {
+		this.up = new Sprite(up);
+		this.down = new Sprite(up);
+		this.down.setColor(new Color(0.9f, 0.9f, 0.9f, 1));
+
+		this.x = x;
+		this.y = y;
+
+		this.up.setX(x);
+		this.up.setY(y);
+		this.down.setX(x + 1f);
+		this.down.setY(y - 1f);
+
+		this.answer = answer;
+
+		sprite = this.up;
+
+		width = sprite.getWidth();
+		height = sprite.getHeight();
+
+		hitbox = new Rectangle(x, y, width, height);
+
+		font = new BitmapFont();
+	}
+
+	public void setDown(Texture down) {
+		this.down = new Sprite(down);
+		this.down.setX(x);
+		this.down.setY(y);
+	}
+
+	public void hovered() {
+		if (mouseDown) {
+			accessed();
+		}
+	}
+
+	public void accessed() {
+		clicked = true;
+		accessed = true;
+	}
+
+	public void update() {
+		prevAccessed = accessed;
+		prevMouseDown = mouseDown;
+		if (!mouseDown && !accessed)
+			accessed = false;
+
+		mouseX = Gdx.input.getX();
+		mouseY = Main.HEIGHT - Gdx.input.getY();
+		Vector2 mouse = new Vector2(mouseX, mouseY);
+
+		if (!prevMouseDown && !mouseDown && Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+			mouseDown = true;
+		} else {
+			mouseDown = false;
+			accessed = false;
+			clicked = false;
+		}
+		if (hitbox.contains(mouse) || accessed) {
+			hovered();
+			sprite = down;
+		} else {
+			sprite = up;
+		}
+	}
+
+	public void draw(SpriteBatch sb) {
+		if (draw) {
+			sprite.draw(sb);
+			Fonts.textFontWhite.draw(sb, answer, x + 10, y + 50);
+		}
+	}
+
+	public boolean isAccessed() {
+		return accessed;
+	}
+
+	public boolean clicked() {
+		return clicked;
+	}
+
+	public boolean isPrevAccessed() {
+		return prevAccessed;
+	}
+
+	public void setAccessed(boolean accessed) {
+		this.accessed = accessed;
+	}
+
+	public void setTint(Color c) {
+		up.setColor(c);
+		down.setColor(c);
+	}
+
+	public void print() {
+		System.out.println(mouseX + " " + mouseY + "  |  " + hitbox);
+	}
+
+	public float getX() {
+		return x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public Sprite getSprite() {
+		return sprite;
+	}
+}

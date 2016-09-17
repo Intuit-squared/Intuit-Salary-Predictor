@@ -1,0 +1,13 @@
+public class Page() {
+	
+	public String question;
+	
+	public Page(String question) {
+		this.question = question;
+		
+	}
+	
+	
+	
+	
+}
