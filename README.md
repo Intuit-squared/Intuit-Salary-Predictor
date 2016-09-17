@@ -4,7 +4,7 @@ This is a program which uses US Census data to predict salary based on your occu
 
 To execute the program, first clone this repository:
 
-`git clone <url for repository>`
+`git clone https://github.com/Intuit-squared/Intuit-Salary-Predictor.git`
 
 Open up the jar file to run the program. Either double click the jar file or navigate to the file and run 
 
